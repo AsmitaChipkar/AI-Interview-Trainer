@@ -1,0 +1,273 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+.interview-wrapper{
+width:100%;
+max-width:1300px;
+margin:auto;
+padding:30px;
+padding-bottom:90px;
+}
+
+/* TITLE */
+
+.page-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:18px;
+}
+
+/* TOP INFO */
+
+.top-info{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.q-badge{
+background:#eef2ff;
+padding:8px 16px;
+border-radius:20px;
+font-weight:700;
+}
+
+.cat-badge{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+padding:8px 16px;
+border-radius:20px;
+font-weight:700;
+}
+
+/* QUESTION */
+
+.question-card{
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+margin-bottom:25px;
+}
+
+.question-text{
+font-size:24px;
+font-weight:700;
+line-height:1.5;
+}
+
+/* PROGRESS */
+
+.progress{
+height:14px;
+border-radius:10px;
+background:#e2e8f0;
+margin-top:15px;
+}
+
+.progress-bar{
+background:linear-gradient(90deg,#2563eb,#4f46e5);
+}
+
+/* GRID */
+
+.answer-grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:25px;
+}
+
+/* ANSWER */
+
+.answer-panel{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.answer-box{
+width:100%;
+min-height:220px;
+padding:18px;
+border-radius:14px;
+border:1px solid #dbe2ea;
+font-size:15px;
+outline:none;
+resize:none;
+}
+
+.answer-box:focus{
+border-color:#2563eb;
+}
+
+/* SIDE PANEL */
+
+.tip-panel{
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.tip-panel h5{
+font-weight:800;
+margin-bottom:12px;
+}
+
+.tip-panel ul{
+padding-left:18px;
+color:#475569;
+font-size:14px;
+}
+
+/* BTN */
+
+.submit-btn{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+border:none;
+padding:12px 22px;
+border-radius:12px;
+font-weight:700;
+margin-top:15px;
+}
+
+/* ERROR */
+
+.error-text{
+color:red;
+margin-top:10px;
+}
+
+/* LOADING */
+
+.loading-screen{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.97);
+z-index:9999;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-size:20px;
+}
+
+.spinner{
+width:55px;
+height:55px;
+border:6px solid #e2e8f0;
+border-top:6px solid #2563eb;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+</style>
+
+
+<div class="interview-wrapper">
+
+<div class="page-title">AI Mock Interview</div>
+
+<div class="top-info">
+<div class="q-badge">Question {{qno}} of {{total}}</div>
+<div class="cat-badge">{{category if category else "Interview"}}</div>
+</div>
+
+<div class="question-card">
+
+<div class="question-text">
+{{question}}
+</div>
+
+<div class="progress">
+<div class="progress-bar" style="width: {{ (qno/total)*100 }}%"></div>
+</div>
+
+</div>
+
+
+<form method="POST" id="answerForm">
+
+<div class="answer-grid">
+
+<!-- LEFT ANSWER -->
+
+<div class="answer-panel">
+
+<textarea
+name="answer"
+class="answer-box"
+placeholder="Type your detailed answer here..."
+autofocus
+></textarea>
+
+<button class="submit-btn">Submit Answer</button>
+
+{% if error %}
+<p class="error-text">{{error}}</p>
+{% endif %}
+
+</div>
+
+<!-- RIGHT TIPS -->
+
+<div class="tip-panel">
+
+<h5>Interview Tips</h5>
+
+<ul>
+<li>Answer clearly and in complete sentences</li>
+<li>Use technical terms where relevant</li>
+<li>Stay structured: Intro → Explanation → Conclusion</li>
+<li>Avoid one-line answers</li>
+<li>Show confidence in your wording</li>
+</ul>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+
+<div class="loading-screen" id="loadingScreen">
+<div class="spinner"></div>
+<p>Analyzing your answers...</p>
+<p>Generating AI feedback report...</p>
+</div>
+
+
+<script>
+
+const currentQuestion = {{qno}};
+const totalQuestions = {{total}};
+
+document.getElementById("answerForm").addEventListener("submit", function(){
+if(currentQuestion === totalQuestions){
+document.getElementById("loadingScreen").style.display="flex";
+}
+});
+
+</script>
+
+{% endblock %}

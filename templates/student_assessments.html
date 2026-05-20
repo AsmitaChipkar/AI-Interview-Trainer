@@ -1,0 +1,35 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<h2>Available Assessments</h2>
+
+{% if assessments %}
+
+<ul>
+
+{% for a in assessments %}
+
+<li>
+
+<strong>{{a.title}}</strong> - {{a.category}}
+
+<a href="/interview?category={{a.category}}">
+<button style="margin-left:10px;background:#2563eb;color:white;border:none;padding:5px 10px">
+Start
+</button>
+</a>
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>No assessments available.</p>
+
+{% endif %}
+
+{% endblock %}

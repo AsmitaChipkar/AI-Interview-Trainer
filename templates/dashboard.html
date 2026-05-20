@@ -1,0 +1,382 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+/* WRAPPER */
+
+.dashboard-wrapper{
+width:100%;
+max-width:1400px;
+margin:auto;
+padding:30px;
+padding-bottom:120px;
+}
+
+/* TOP */
+
+.top-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.page-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.welcome-text{
+color:#64748b;
+font-size:16px;
+}
+
+/* HERO */
+
+.hero-card{
+padding:40px;
+border-radius:24px;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+box-shadow:0 20px 50px rgba(37,99,235,0.35);
+}
+
+.hero-title{
+font-size:34px;
+font-weight:900;
+}
+
+.hero-sub{
+font-size:16px;
+opacity:0.9;
+}
+
+/* START BTN */
+
+.hero-start-btn{
+display:inline-block;
+margin-top:18px;
+padding:12px 22px;
+background:white;
+color:#2563eb;
+text-decoration:none;
+border-radius:12px;
+font-weight:800;
+}
+
+/* STREAK */
+
+.streak-box{
+padding:25px;
+border-radius:20px;
+background:linear-gradient(135deg,#f97316,#fb923c);
+color:white;
+font-size:20px;
+box-shadow:0 10px 30px rgba(249,115,22,0.3);
+display:flex;
+justify-content:space-between;
+}
+
+/* XP */
+
+.xp-box{
+padding:30px;
+border-radius:20px;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+}
+
+.xp-box h5{
+font-size:22px;
+}
+
+.xp-bar{
+height:16px;
+background:rgba(255,255,255,0.3);
+border-radius:12px;
+margin-top:12px;
+overflow:hidden;
+}
+
+.xp-fill{
+height:100%;
+background:white;
+width: {{ (total_interviews*10) % 100 }}%;
+}
+
+/* SECTION */
+
+.section-title{
+font-size:26px;
+font-weight:800;
+margin-top:60px;
+margin-bottom:25px;
+}
+
+/* CARD */
+
+.card-ui{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* STATS */
+
+.stat-card{
+padding:30px;
+border-radius:20px;
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+text-align:center;
+}
+
+.stat-number{
+font-size:38px;
+font-weight:900;
+color:#2563eb;
+}
+
+/* VISUAL CARDS */
+
+.visual-card{
+padding:28px;
+border-radius:20px;
+color:white;
+}
+
+.blue{background:linear-gradient(135deg,#2563eb,#4f46e5);}
+.orange{background:linear-gradient(135deg,#f97316,#fb923c);}
+.green{background:linear-gradient(135deg,#10b981,#34d399);}
+
+.subtext{
+color:#64748b;
+}
+
+</style>
+
+
+<div class="dashboard-wrapper">
+
+<div class="top-bar">
+<div class="page-title">Dashboard</div>
+<div class="welcome-text">Welcome, {{session.username}} 👋</div>
+</div>
+
+
+<!-- TOP GRID -->
+
+<div class="row g-4 mb-4">
+
+<div class="col-md-5">
+
+<div class="streak-box mb-4">
+<div>🔥 Daily Streak</div>
+<div>{{total_interviews}} Days</div>
+</div>
+
+<div class="xp-box">
+<h5>Progress to Next Level</h5>
+<p>{{total_interviews*10}} XP earned</p>
+<div class="xp-bar">
+<div class="xp-fill"></div>
+</div>
+</div>
+
+</div>
+
+
+<div class="col-md-7">
+
+<div class="hero-card h-100 d-flex flex-column justify-content-center">
+
+<div class="hero-title">
+Level {{ (total_interviews*10)//100 + 1 }}
+</div>
+
+<div class="hero-sub mt-2">
+{{total_interviews*10}} XP earned so far
+</div>
+
+<div class="mt-3" style="opacity:0.9;">
+Keep practicing daily to level up faster 🚀
+</div>
+
+<a href="/startpage" class="hero-start-btn">
+▶ Start Interview Practice
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CENTER BLOCK -->
+
+<div class="card-ui text-center">
+<h3>Consistent practice leads to confident interviews</h3>
+<p class="subtext mt-2">
+Focus on clarity, structure, and communication to improve faster.
+</p>
+</div>
+
+
+<!-- STATS -->
+
+<div class="section-title">Performance Overview</div>
+
+<div class="row g-4">
+
+<div class="col-md-3">
+<div class="stat-card">
+<div class="stat-number">{{total_interviews}}</div>
+<p>Total Interviews</p>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="stat-card">
+<div class="stat-number">{{avg_score}}</div>
+<p>Average Score</p>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="stat-card">
+<div class="stat-number">{{total_interviews}}</div>
+<p>Streak</p>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="stat-card">
+<div class="stat-number">
+{% if avg_score >= 8 %}Advanced
+{% elif avg_score >= 6 %}Intermediate
+{% else %}Beginner{% endif %}
+</div>
+<p>Skill Level</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- DAILY PREP -->
+
+<div class="section-title">Daily Prep Plan</div>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="visual-card blue">
+<h5>📌 Focus</h5>
+<p>Practice 2 interviews today</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="visual-card orange">
+<h5>⚡ Task</h5>
+<p>Revise key concepts</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="visual-card green">
+<h5>🎯 Goal</h5>
+<p>Improve clarity</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- STRATEGY -->
+
+<div class="section-title">Interview Strategy</div>
+
+<div class="row g-4">
+
+<div class="col-md-6">
+<div class="card-ui">
+<h5>🧠 Problem Solving Approach</h5>
+<ul class="subtext">
+<li>Break problems into smaller steps</li>
+<li>Explain your thinking before coding</li>
+<li>Clarify requirements before starting</li>
+<li>Think aloud to show reasoning</li>
+</ul>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card-ui">
+<h5>💬 Communication Skills</h5>
+<ul class="subtext">
+<li>Structure answers clearly</li>
+<li>Use simple understandable language</li>
+<li>Stay calm and confident</li>
+<li>Avoid rushing answers</li>
+</ul>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card-ui">
+<h5>⚡ Common Mistakes to Avoid</h5>
+<ul class="subtext">
+<li>Jumping without planning</li>
+<li>Not explaining decisions</li>
+<li>Ignoring edge cases</li>
+<li>Staying silent when stuck</li>
+</ul>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card-ui">
+<h5>🏆 Pro Interview Tips</h5>
+<ul class="subtext">
+<li>Clarity is more important than speed</li>
+<li>Confidence improves with repetition</li>
+<li>Use examples when possible</li>
+<li>Practice structured thinking</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+
+<!-- AI INSIGHT -->
+
+<div class="section-title">AI Coaching Insights</div>
+
+<div class="card-ui">
+
+{% if total_interviews == 0 %}
+<p class="subtext">You are just getting started. Begin with basic interviews and build answer confidence.</p>
+
+{% elif avg_score < 6 %}
+<p class="subtext">Your current performance indicates that fundamentals and structured answering need more focus. Practice weaker categories consistently.</p>
+
+{% elif avg_score < 8 %}
+<p class="subtext">You are improving steadily. Continue refining answer quality, confidence, and communication clarity.</p>
+
+{% else %}
+<p class="subtext">You are performing strongly. Focus now on advanced interview pressure simulation and precision.</p>
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

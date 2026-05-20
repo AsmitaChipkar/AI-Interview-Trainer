@@ -1,0 +1,256 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+.result-wrapper{
+width:100%;
+max-width:1300px;
+margin:auto;
+padding:30px;
+padding-bottom:100px;
+}
+
+/* TITLE */
+
+.page-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
+}
+
+/* TOP SCORE HERO */
+
+.score-card{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+padding:45px;
+border-radius:24px;
+box-shadow:0 15px 40px rgba(37,99,235,0.25);
+text-align:center;
+margin-bottom:35px;
+color:white;
+}
+
+.score-card h3{
+font-size:26px;
+font-weight:700;
+}
+
+.score-number{
+font-size:62px;
+font-weight:900;
+margin-top:10px;
+}
+
+/* LEVEL */
+
+.level{
+display:inline-block;
+padding:8px 16px;
+border-radius:22px;
+font-size:15px;
+margin-top:15px;
+font-weight:700;
+background:white;
+color:#2563eb;
+}
+
+/* SUMMARY CARDS */
+
+.summary-box{
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+padding:25px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+height:100%;
+}
+
+.summary-box h4{
+font-size:24px;
+font-weight:800;
+color:#2563eb;
+}
+
+/* FEEDBACK CARD */
+
+.feedback-card{
+background:white;
+padding:28px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+height:100%;
+transition:0.25s;
+}
+
+.feedback-card:hover{
+transform:translateY(-5px);
+}
+
+.section-title{
+font-size:20px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+/* AI INSIGHT */
+
+.ai-final{
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+margin-top:40px;
+}
+
+.ai-final h4{
+font-weight:800;
+margin-bottom:12px;
+}
+
+/* BUTTONS */
+
+.action-btn{
+display:inline-block;
+padding:12px 22px;
+border-radius:12px;
+text-decoration:none;
+font-weight:800;
+margin:10px;
+}
+
+.blue-btn{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+}
+
+.white-btn{
+background:white;
+color:#2563eb;
+border:1px solid #dbe2ea;
+}
+
+</style>
+
+
+<div class="result-wrapper">
+
+<div class="page-title">AI Evaluation Report</div>
+
+
+<!-- HERO SCORE -->
+
+<div class="score-card">
+
+<h3>Interview Completed Successfully 🎉</h3>
+
+<div class="score-number">
+{{score}} / 10
+</div>
+
+{% if score >= 8 %}
+<div class="level">Advanced Performance</div>
+{% elif score >= 6 %}
+<div class="level">Intermediate Performance</div>
+{% else %}
+<div class="level">Beginner Level</div>
+{% endif %}
+
+</div>
+
+
+<!-- QUICK SUMMARY -->
+
+<div class="row g-4 mb-4">
+
+<div class="col-md-4">
+<div class="summary-box">
+<h4>{{score}}</h4>
+<p>Overall Score</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="summary-box">
+<h4>
+{% if score >= 8 %}Strong
+{% elif score >= 6 %}Moderate
+{% else %}Needs Work{% endif %}
+</h4>
+<p>Confidence Level</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="summary-box">
+<h4>
+{% if score >= 8 %}Ready
+{% elif score >= 6 %}Improving
+{% else %}Practice More{% endif %}
+</h4>
+<p>Interview Readiness</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- FEEDBACK -->
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="feedback-card">
+<div class="section-title">✅ Strengths</div>
+<p>{{strengths}}</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feedback-card">
+<div class="section-title">⚠ Weaknesses</div>
+<p>{{weaknesses}}</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feedback-card">
+<div class="section-title">🚀 How to Improve</div>
+<p>{{improvements}}</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- FINAL AI INSIGHT -->
+
+<div class="ai-final">
+
+<h4>AI Final Recommendation</h4>
+
+<p>
+This report reflects your current interview performance based on answer clarity, concept understanding, and communication quality. Repeated mock interview practice will steadily improve confidence and precision in real placement interviews.
+</p>
+
+<div style="text-align:center;margin-top:20px;">
+
+<a href="/startpage" class="action-btn blue-btn">
+▶ Practice Another Interview
+</a>
+
+<a href="/dashboard" class="action-btn white-btn">
+Back to Dashboard
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

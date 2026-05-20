@@ -1,0 +1,267 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+.profile-wrapper{
+width:100%;
+max-width:1400px;
+margin:auto;
+padding:30px;
+padding-bottom:110px;
+}
+
+.page-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:22px;
+}
+
+/* HERO */
+
+.profile-header{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+padding:35px;
+border-radius:22px;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:35px;
+box-shadow:0 15px 40px rgba(37,99,235,0.3);
+}
+
+.username{
+font-size:30px;
+font-weight:800;
+}
+
+.hero-sub{
+opacity:0.9;
+font-size:15px;
+}
+
+.level{
+padding:8px 18px;
+border-radius:22px;
+font-size:15px;
+background:white;
+color:#2563eb;
+font-weight:700;
+}
+
+/* COMMON EQUAL CARD */
+
+.equal-card{
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+/* STATS */
+
+.stat-card{
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+padding:28px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+text-align:center;
+height:100%;
+}
+
+.stat-number{
+font-size:36px;
+font-weight:800;
+color:#2563eb;
+}
+
+.section-title{
+font-size:24px;
+font-weight:800;
+margin-top:50px;
+margin-bottom:20px;
+}
+
+/* SNAPSHOT */
+
+.info-card{
+padding:30px;
+border-radius:20px;
+color:white;
+height:100%;
+}
+
+.blue{background:linear-gradient(135deg,#2563eb,#4f46e5);}
+.orange{background:linear-gradient(135deg,#f97316,#fb923c);}
+
+/* ACHIEVEMENTS */
+
+.achievement-card{
+background:white;
+padding:22px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+display:flex;
+align-items:center;
+gap:12px;
+height:100%;
+min-height:90px;
+}
+
+.achievement-icon{
+font-size:24px;
+}
+
+/* LAST SCORE */
+
+.last-score{
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+padding:35px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.last-score h3{
+font-size:42px;
+font-weight:900;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.subtext{
+color:#64748b;
+font-size:14px;
+}
+
+</style>
+
+
+<div class="profile-wrapper">
+
+<div class="page-title">Your Profile</div>
+
+<!-- HERO -->
+
+<div class="profile-header">
+
+<div>
+<div class="username">{{username}}</div>
+<div class="hero-sub">Track your interview progress, achievements, and personal growth.</div>
+</div>
+
+<div class="level">{{level}}</div>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="stat-card equal-card">
+<div class="stat-number">{{total}}</div>
+<p>Total Interviews</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="stat-card equal-card">
+<div class="stat-number">{{avg}}</div>
+<p>Average Score</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="stat-card equal-card">
+<div class="stat-number">{{best}}</div>
+<p>Best Score</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- SNAPSHOT -->
+
+<div class="section-title">Growth Snapshot</div>
+
+<div class="row g-4">
+
+<div class="col-md-6">
+<div class="info-card blue equal-card">
+<h4>Current Level</h4>
+<p style="font-size:24px;font-weight:800;">{{level}}</p>
+<p>Your current interview preparation stage.</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="info-card orange equal-card">
+<h4>Consistency Status</h4>
+<p style="font-size:24px;font-weight:800;">
+{% if avg >= 8 %}Strong{% elif avg >= 6 %}Moderate{% else %}Developing{% endif %}
+</p>
+<p>Your present stability across interviews.</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- ACHIEVEMENTS -->
+
+<div class="section-title">Achievements</div>
+
+<div class="row g-4">
+
+{% for a in achievements %}
+<div class="col-md-4">
+<div class="achievement-card">
+<span class="achievement-icon">🏆</span>
+<span>{{a}}</span>
+</div>
+</div>
+{% endfor %}
+
+</div>
+
+
+<!-- LAST PERFORMANCE -->
+
+<div class="section-title">Latest Performance</div>
+
+<div class="last-score">
+<h3>{{ last if last else "0" }} / 10</h3>
+<p class="subtext">Your most recent interview score</p>
+</div>
+
+
+<!-- PROFILE INSIGHT -->
+
+<div class="section-title">Profile Insight</div>
+
+<div class="last-score">
+
+<p class="subtext">
+Your profile reflects how consistently you are engaging with interview practice. Repeated attempts improve clarity, confidence, and technical depth.
+</p>
+
+<ul class="subtext mt-3" style="text-align:left;">
+<li>Continue practicing weaker categories</li>
+<li>Review analytics trends regularly</li>
+<li>Use AI Chat for concept clarity</li>
+<li>Build consistency through repeated mocks</li>
+</ul>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register - AI Interview Platform</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+min-height:100vh;
+background:linear-gradient(135deg,#0f172a,#1d4ed8,#06b6d4);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+.auth-card{
+width:100%;
+max-width:460px;
+padding:45px;
+border-radius:22px;
+background:rgba(255,255,255,0.96);
+box-shadow:0 20px 60px rgba(0,0,0,0.25);
+}
+.title{
+text-align:center;
+font-size:30px;
+font-weight:800;
+margin-bottom:8px;
+color:#1e293b;
+}
+.sub{
+text-align:center;
+color:#64748b;
+margin-bottom:28px;
+}
+.form-control{
+padding:14px;
+border-radius:10px;
+margin-bottom:16px;
+}
+.reg-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#06b6d4,#2563eb);
+color:white;
+font-size:16px;
+font-weight:600;
+}
+.bottom{
+text-align:center;
+margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="auth-card">
+<div class="title">Create Account</div>
+<div class="sub">Start your AI powered interview journey</div>
+
+<form method="POST">
+<input class="form-control" name="username" placeholder="Choose Username" required>
+<input class="form-control" type="password" name="password" placeholder="Create Password" required>
+<button class="reg-btn">Register Now</button>
+</form>
+
+<div class="bottom">
+<a href="/login">Already have an account? Login</a>
+</div>
+</div>
+
+</body>
+</html>

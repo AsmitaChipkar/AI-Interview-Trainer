@@ -1,0 +1,362 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+.analytics-wrapper{
+width:100%;
+max-width:1400px;
+margin:auto;
+padding:30px;
+padding-bottom:120px;
+}
+
+/* TITLE */
+
+.page-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:25px;
+}
+
+/* HERO */
+
+.analytics-hero{
+padding:35px;
+border-radius:22px;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+text-align:center;
+margin-bottom:35px;
+box-shadow:0 15px 40px rgba(37,99,235,0.3);
+}
+
+.analytics-hero h3{
+font-size:28px;
+font-weight:800;
+}
+
+/* SECTION */
+
+.section-title{
+font-size:26px;
+font-weight:800;
+margin-top:50px;
+margin-bottom:20px;
+}
+
+/* CARD */
+
+.card-ui{
+background:white;
+padding:28px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.summary-card{
+padding:28px;
+border-radius:20px;
+text-align:center;
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.summary-value{
+font-size:34px;
+font-weight:800;
+color:#2563eb;
+}
+
+/* SKILL */
+
+.skill{
+margin-bottom:22px;
+}
+
+.skill-name{
+font-weight:600;
+margin-bottom:8px;
+font-size:15px;
+}
+
+.progress{
+height:14px;
+border-radius:10px;
+background:#e2e8f0;
+}
+
+.progress-bar{
+background:linear-gradient(90deg,#2563eb,#4f46e5);
+}
+
+/* BADGE */
+
+.badge-box{
+padding:10px 16px;
+border-radius:12px;
+background:#eef2ff;
+display:inline-block;
+font-size:14px;
+font-weight:600;
+}
+
+/* VISUAL INFO CARD */
+
+.info-card{
+padding:25px;
+border-radius:20px;
+color:white;
+}
+
+.blue{background:linear-gradient(135deg,#2563eb,#4f46e5);}
+.orange{background:linear-gradient(135deg,#f97316,#fb923c);}
+
+.subtext{
+color:#64748b;
+font-size:14px;
+}
+
+</style>
+
+
+<div class="analytics-wrapper">
+
+<div class="page-title">Performance Analytics</div>
+
+<div class="analytics-hero">
+<h3>Track. Analyze. Improve.</h3>
+<p>Understand where you perform well and where you need focused practice.</p>
+</div>
+
+
+<!-- SUMMARY -->
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="summary-card">
+📊
+<div class="summary-value">{{scores|max}}</div>
+<p>Best Score</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="summary-card">
+📉
+<div class="summary-value">{{scores|min}}</div>
+<p>Lowest Score</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="summary-card">
+⚡
+<div class="summary-value">{{ (scores|sum / scores|length) | round(1) }}</div>
+<p>Average</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- VISUAL INSIGHT BLOCK -->
+
+<div class="section-title">Performance Snapshot</div>
+
+<div class="row g-4">
+
+<div class="col-md-6">
+<div class="info-card blue">
+<h4>Strongest Category</h4>
+<p style="font-size:22px;font-weight:700;">
+{{categories[scores.index(scores|max)]}}
+</p>
+<p>Your highest confidence area currently.</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="info-card orange">
+<h4>Improvement Zone</h4>
+<p style="font-size:22px;font-weight:700;">
+{{categories[scores.index(scores|min)]}}
+</p>
+<p>Requires more targeted practice and revision.</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- SKILL PERFORMANCE -->
+
+<div class="section-title">Skill Performance Breakdown</div>
+
+<div class="card-ui">
+
+{% for i in range(categories|length) %}
+
+<div class="skill">
+
+<div class="skill-name">
+{{categories[i]}} – {{scores[i]}} / 10
+</div>
+
+<div class="progress">
+<div class="progress-bar" style="width: {{scores[i]*10}}%"></div>
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<!-- CHART -->
+
+<div class="section-title">Category Comparison</div>
+
+<div class="card-ui">
+
+<div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+<button onclick="showBar()" class="start-btn" style="padding:6px 12px;">Bar</button>
+<button onclick="showRadar()" class="start-btn ms-2" style="padding:6px 12px;">Radar</button>
+</div>
+
+<canvas id="scoreChart"></canvas>
+
+<p class="subtext mt-3 text-center">
+Visual comparison of your category-wise performance.
+</p>
+
+</div>
+
+
+<!-- CONSISTENCY -->
+
+<div class="section-title">Consistency Report</div>
+
+<div class="card-ui text-center">
+
+<h4 style="font-size:28px;color:#2563eb;">
+{{ (scores|max) - (scores|min) }}
+</h4>
+
+<p class="subtext">
+Score difference between your strongest and weakest category.
+Lower difference means more balanced performance.
+</p>
+
+</div>
+
+
+<!-- AI INSIGHT -->
+
+<div class="section-title">AI Coaching Report</div>
+
+<div class="card-ui">
+
+{% if scores|length == 0 %}
+
+<p class="subtext">
+Start interviews to generate detailed analytics.
+</p>
+
+{% elif (scores|min) < 6 %}
+
+<p class="subtext">
+Your analytics indicate inconsistency across categories. Immediate focus should be placed on weaker areas while maintaining your strengths.
+</p>
+
+<ul class="subtext">
+<li>Revise concepts in low scoring categories</li>
+<li>Practice structured explanations</li>
+<li>Take more timed mock interviews</li>
+</ul>
+
+{% elif (scores|max) >= 8 %}
+
+<p class="subtext">
+You are showing strong performance in multiple categories. Continue refining depth, precision, and speed of response.
+</p>
+
+<ul class="subtext">
+<li>Practice advanced questions</li>
+<li>Simulate real interview pressure</li>
+<li>Improve concise communication</li>
+</ul>
+
+{% else %}
+
+<p class="subtext">
+You are progressing steadily. Focus on consistency and reducing performance variation.
+</p>
+
+<ul class="subtext">
+<li>Increase daily practice frequency</li>
+<li>Use examples while answering</li>
+<li>Work on confidence and flow</li>
+</ul>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const categories = {{categories | tojson}};
+const scores = {{scores | tojson}};
+let chart;
+
+function createChart(type){
+
+if(chart){
+chart.destroy();
+}
+
+const ctx = document.getElementById("scoreChart");
+
+chart = new Chart(ctx, {
+type:type,
+data:{
+labels:categories,
+datasets:[{
+label:"Performance",
+data:scores,
+backgroundColor:type==="bar" ? "rgba(79,70,229,0.7)" : "rgba(37,99,235,0.35)",
+borderColor:"#2563eb",
+borderWidth:2,
+borderRadius:8,
+fill:true
+}]
+},
+options:{
+responsive:true,
+plugins:{legend:{display:false}},
+scales:{
+y:{beginAtZero:true,max:10}
+}
+}
+});
+}
+
+createChart("bar");
+
+function showBar(){ createChart("bar"); }
+function showRadar(){ createChart("radar"); }
+
+</script>
+
+{% endblock %}

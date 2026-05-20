@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(135deg,#eef4ff,#f8fbff);
+color:#0f172a;
+}
+
+/* TOPBAR */
+
+.topbar{
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+padding:18px 34px;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+
+.top-title{
+font-size:24px;
+font-weight:800;
+}
+
+.top-sub{
+font-size:13px;
+opacity:0.8;
+margin-top:2px;
+}
+
+.logout-btn{
+color:white;
+text-decoration:none;
+background:rgba(255,255,255,0.12);
+padding:9px 16px;
+border-radius:10px;
+font-size:14px;
+}
+
+/* WRAPPER */
+
+.wrapper{
+max-width:1350px;
+margin:auto;
+padding:28px;
+}
+
+/* HERO */
+
+.hero-strip{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+padding:22px 28px;
+border-radius:18px;
+color:white;
+margin-bottom:24px;
+box-shadow:0 12px 28px rgba(37,99,235,0.16);
+}
+
+.hero-title{
+font-size:24px;
+font-weight:800;
+}
+
+.hero-text{
+margin-top:6px;
+font-size:14px;
+line-height:1.6;
+opacity:0.92;
+max-width:850px;
+}
+
+/* STAT GRID */
+
+.card-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px;
+margin-bottom:28px;
+}
+
+.stat-card{
+background:white;
+padding:26px;
+border-radius:18px;
+box-shadow:0 10px 24px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.stat-card:hover{
+transform:translateY(-6px);
+box-shadow:0 16px 30px rgba(37,99,235,0.10);
+}
+
+.stat-title{
+font-size:14px;
+color:#64748b;
+font-weight:600;
+margin-bottom:10px;
+}
+
+.stat-value{
+font-size:36px;
+font-weight:800;
+color:#2563eb;
+}
+
+/* DOUBLE PANEL */
+
+.double{
+display:grid;
+grid-template-columns:1.2fr 1fr;
+gap:24px;
+align-items:start;
+margin-bottom:28px;
+}
+
+/* PANEL */
+
+.panel{
+background:white;
+padding:26px;
+border-radius:18px;
+box-shadow:0 10px 24px rgba(0,0,0,0.05);
+margin-bottom:28px;
+}
+
+.panel-title{
+font-size:22px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+/* SMALL NOTE */
+
+.small-note{
+color:#64748b;
+line-height:1.8;
+font-size:15px;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#eaf2ff;
+padding:15px;
+font-size:14px;
+text-align:left;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #edf2f7;
+font-size:14px;
+}
+
+tr:hover{
+background:#f8fbff;
+}
+
+/* BADGES */
+
+.score-badge{
+padding:6px 12px;
+border-radius:20px;
+background:#dbeafe;
+color:#1d4ed8;
+font-weight:600;
+font-size:13px;
+}
+
+.delete-btn{
+background:#dc2626;
+color:white;
+padding:8px 14px;
+text-decoration:none;
+border-radius:8px;
+font-size:13px;
+}
+
+.delete-btn:hover{
+background:#b91c1c;
+color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+.card-grid{
+grid-template-columns:1fr;
+}
+.double{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div>
+        <div class="top-title">🛡️ InterviewAI Admin Center</div>
+        <div class="top-sub">Platform Monitoring • User Control • Interview Analytics</div>
+    </div>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+
+<div class="wrapper">
+
+<div class="hero-strip">
+    <div class="hero-title">Administrative Overview</div>
+    <div class="hero-text">
+        Real-time centralized control panel for monitoring learner registrations, interview participation,
+        AI scoring trends and complete platform activity supervision.
+    </div>
+</div>
+
+
+<div class="card-grid">
+
+    <div class="stat-card">
+        <div class="stat-title">Total Registered Users</div>
+        <div class="stat-value">{{total_users}}</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Total Interviews Conducted</div>
+        <div class="stat-value">{{total_interviews}}</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Platform Average Score</div>
+        <div class="stat-value">{{avg_score}}</div>
+    </div>
+
+</div>
+
+
+<div class="double">
+
+    <div class="panel">
+        <div class="panel-title">Interview Category Distribution</div>
+        <canvas id="adminChart"></canvas>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title">Platform Summary Insight</div>
+
+        <p class="small-note">
+            This administrative center provides a unified overview of total registered users,
+            interview engagement density, AI performance scoring averages and overall platform usage patterns.
+        </p>
+
+        <p class="small-note">
+            Administrators can supervise user level activity, inspect recent interviews and maintain
+            platform quality using the management console below.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="panel">
+    <div class="panel-title">Registered Users Management Console</div>
+
+    <table>
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Total Interviews</th>
+            <th>Average Score</th>
+            <th>Administrative Action</th>
+        </tr>
+
+        {% for user in users_data %}
+        <tr>
+            <td>{{user['id']}}</td>
+            <td>{{user['username']}}</td>
+            <td>{{user['interviews']}}</td>
+            <td><span class="score-badge">{{ "%.2f"|format(user['avgscore'] or 0) }}</span></td>
+            <td><a href="/delete-user/{{user['id']}}" class="delete-btn">Delete User</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<div class="panel">
+    <div class="panel-title">Recent Platform Interview Activities</div>
+
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Category</th>
+            <th>Score</th>
+            <th>Date</th>
+        </tr>
+
+        {% for row in recent_activity %}
+        <tr>
+            <td>{{row['username']}}</td>
+            <td>{{row['category']}}</td>
+            <td><span class="score-badge">{{row['score']}}</span></td>
+            <td>{{row['date']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</div>
+
+
+<script>
+const labels = [
+{% for row in category_data %}
+"{{row['category']}}",
+{% endfor %}
+];
+
+const values = [
+{% for row in category_data %}
+{{row['c']}},
+{% endfor %}
+];
+
+new Chart(document.getElementById("adminChart"),{
+type:"bar",
+data:{
+labels:labels,
+datasets:[{
+label:"Interviews",
+data:values,
+backgroundColor:"rgba(79,70,229,0.75)",
+borderRadius:10
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{display:false}
+},
+scales:{
+y:{beginAtZero:true}
+}
+}
+});
+</script>
+
+</body>
+</html>

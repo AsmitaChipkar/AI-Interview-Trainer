@@ -1,0 +1,68 @@
+{% extends "dashboard_base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Admin Panel</h2>
+
+<h4>Users</h4>
+
+<table class="table table-bordered">
+
+<thead style="background:#3742fa;color:white">
+
+<tr>
+<th>ID</th>
+<th>Username</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for user in users %}
+
+<tr>
+<td>{{ user.id }}</td>
+<td>{{ user.username }}</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+
+<h4 class="mt-5">All Interview Results</h4>
+
+<table class="table table-bordered">
+
+<thead style="background:#3742fa;color:white">
+
+<tr>
+<th>User</th>
+<th>Category</th>
+<th>Score</th>
+<th>Date</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for interview in interviews %}
+
+<tr>
+<td>{{ interview.username }}</td>
+<td>{{ interview.category }}</td>
+<td>{{ interview.score }}</td>
+<td>{{ interview.date }}</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

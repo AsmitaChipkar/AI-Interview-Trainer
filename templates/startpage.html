@@ -1,0 +1,151 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+.start-wrapper{
+width:100%;
+max-width:1400px;
+margin:auto;
+padding:30px;
+padding-bottom:100px;
+}
+
+.page-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
+}
+
+.start-hero{
+padding:35px;
+border-radius:22px;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+text-align:center;
+margin-bottom:35px;
+}
+
+.feature-box{
+padding:25px;
+border-radius:18px;
+background:#f8fafc;
+text-align:center;
+height:100%;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.section-title{
+font-size:24px;
+font-weight:800;
+margin-top:40px;
+margin-bottom:20px;
+}
+
+.category-card{
+padding:30px;
+border-radius:20px;
+color:white;
+height:100%;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.python{background:linear-gradient(135deg,#2563eb,#4f46e5);}
+.hr{background:linear-gradient(135deg,#f97316,#fb923c);}
+.java{background:linear-gradient(135deg,#10b981,#34d399);}
+.cbg{background:linear-gradient(135deg,#ef4444,#f87171);}
+
+.start-btn{
+display:inline-block;
+margin-top:18px;
+padding:12px 22px;
+background:white;
+color:#2563eb;
+text-decoration:none;
+border-radius:12px;
+font-weight:800;
+}
+
+</style>
+
+
+<div class="start-wrapper">
+
+<div class="page-title">Start Interview</div>
+
+<div class="start-hero">
+<h3>AI Powered Mock Interview System</h3>
+<p>Choose a category and begin your mock interview practice.</p>
+</div>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="feature-box">
+<h4>🧠 Real AI Evaluation</h4>
+<p>AI checks your answers intelligently.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<h4>📊 Detailed Analytics</h4>
+<p>Track category-wise interview performance.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<h4>📄 Smart Report</h4>
+<p>Receive AI strengths and weaknesses.</p>
+</div>
+</div>
+
+</div>
+
+
+<div class="section-title">Select Interview Category</div>
+
+<div class="row g-4">
+
+<div class="col-md-6">
+<div class="category-card python">
+<h4>🐍 Python Interview</h4>
+<p>Practice Python technical concepts.</p>
+<a href="/interview?category=Python" class="start-btn">▶ Start Python Interview</a>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="category-card hr">
+<h4>💬 HR Interview</h4>
+<p>Practice HR communication questions.</p>
+<a href="/interview?category=HR" class="start-btn">▶ Start HR Interview</a>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="category-card java">
+<h4>☕ Java Interview</h4>
+<p>Practice Java technical concepts.</p>
+<a href="/interview?category=Java" class="start-btn">▶ Start Java Interview</a>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="category-card cbg">
+<h4>🔴 C Interview</h4>
+<p>Practice C programming questions.</p>
+<a href="/interview?category=C" class="start-btn">▶ Start C Interview</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+.login-container{
+max-width:450px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.login-title{
+text-align:center;
+font-size:22px;
+font-weight:600;
+margin-bottom:20px;
+}
+
+.input-field{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.login-btn{
+width:100%;
+padding:10px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.login-btn:hover{
+background:#1d4ed8;
+}
+</style>
+
+<div class="login-container">
+
+<div class="login-title">
+University Admin Login
+</div>
+
+<form method="POST">
+
+<input class="input-field" type="email" name="email" placeholder="University Email" required>
+
+<input class="input-field" type="password" name="password" placeholder="Password" required>
+
+<button class="login-btn">Login</button>
+
+</form>
+
+</div>
+
+{% endblock %}

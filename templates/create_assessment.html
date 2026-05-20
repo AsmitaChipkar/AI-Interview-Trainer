@@ -1,0 +1,32 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<div style="max-width:500px;margin:auto;background:white;padding:40px;border-radius:12px">
+
+<h2>Create Assessment</h2>
+
+<form method="POST">
+
+<input type="text" name="title" placeholder="Assessment Title"
+style="width:100%;padding:10px;margin:10px 0">
+
+<select name="category"
+style="width:100%;padding:10px;margin:10px 0">
+
+<option value="Python">Python</option>
+<option value="Java">Java</option>
+<option value="C">C</option>
+<option value="HR">HR</option>
+
+</select>
+
+<button style="padding:10px 20px;background:#2563eb;color:white;border:none">
+Create Assessment
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

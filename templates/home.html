@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Mock Interview Trainer</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+html{scroll-behavior:smooth;}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f8fafc;
+color:#111827;
+overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+background:rgba(255,255,255,0.96);
+backdrop-filter:blur(8px);
+padding:16px 0;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+.navbar-brand{
+font-weight:800;
+font-size:24px;
+color:#2563eb;
+}
+.nav-link{
+margin-right:22px;
+font-weight:600;
+color:#334155;
+}
+.nav-btn{
+padding:9px 20px;
+border-radius:10px;
+margin-left:10px;
+text-decoration:none;
+font-weight:600;
+}
+.btn-login{
+border:1px solid #d1d5db;
+color:#111827;
+background:white;
+}
+.btn-register{
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+}
+
+/* HERO */
+.hero{
+padding:160px 20px 130px;
+background:linear-gradient(135deg,#2563eb,#4f46e5,#06b6d4);
+text-align:center;
+color:white;
+position:relative;
+overflow:hidden;
+}
+.hero h1{
+font-size:64px;
+font-weight:800;
+max-width:900px;
+margin:auto;
+line-height:1.2;
+}
+.hero p{
+font-size:21px;
+max-width:760px;
+margin:25px auto;
+opacity:0.95;
+}
+.hero-btn{
+padding:14px 28px;
+border-radius:12px;
+font-weight:600;
+font-size:18px;
+text-decoration:none;
+display:inline-block;
+margin:10px;
+}
+.hero-primary{
+background:white;
+color:#2563eb;
+}
+.hero-secondary{
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.3);
+color:white;
+}
+
+/* FLOATING STATS */
+.float-card{
+background:white;
+padding:28px;
+border-radius:18px;
+box-shadow:0 15px 40px rgba(0,0,0,0.12);
+text-align:center;
+height:100%;
+transition:0.3s;
+}
+.float-card:hover{
+transform:translateY(-8px);
+}
+.float-value{
+font-size:38px;
+font-weight:800;
+color:#2563eb;
+}
+
+/* SECTION */
+.section{
+padding:110px 20px;
+}
+.section-title{
+font-size:42px;
+font-weight:800;
+text-align:center;
+margin-bottom:18px;
+}
+.section-sub{
+text-align:center;
+max-width:700px;
+margin:auto;
+color:#64748b;
+margin-bottom:50px;
+}
+
+/* FEATURE */
+.feature-box{
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 12px 30px rgba(0,0,0,0.07);
+height:100%;
+text-align:center;
+transition:0.3s;
+}
+.feature-box:hover{
+transform:translateY(-8px);
+box-shadow:0 18px 40px rgba(37,99,235,0.12);
+}
+.icon{
+font-size:44px;
+margin-bottom:15px;
+}
+
+/* SHOWCASE */
+.showcase{
+background:white;
+border-radius:24px;
+padding:35px;
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+.show-box{
+background:#f8fafc;
+padding:20px;
+border-radius:14px;
+margin-bottom:15px;
+}
+
+/* CTA */
+.cta{
+padding:100px 20px;
+text-align:center;
+background:linear-gradient(135deg,#1e3a8a,#2563eb);
+color:white;
+}
+
+/* FOOTER */
+.footer{
+background:#0f172a;
+color:#94a3b8;
+padding:70px 20px;
+text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg">
+<div class="container">
+<a class="navbar-brand">AI Interview Trainer</a>
+<div class="ms-auto d-flex align-items-center">
+<a href="#features" class="nav-link">Features</a>
+<a href="#analytics" class="nav-link">Analytics</a>
+<a href="/login" class="nav-btn btn-login">Login</a>
+<a href="/register" class="nav-btn btn-register">Get Started</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<h1>Master Technical & HR Interviews With AI Intelligence</h1>
+<p>
+An advanced AI powered mock interview ecosystem designed to simulate real interviews,
+analyze your answers, generate performance reports, and accelerate job readiness.
+</p>
+
+<a href="/register" class="hero-btn hero-primary">Start Free Practice</a>
+<a href="/login" class="hero-btn hero-secondary">User Login</a>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="row g-4">
+<div class="col-md-4">
+<div class="float-card">
+<div class="float-value">1200+</div>
+<p>Mock Interviews Conducted</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="float-card">
+<div class="float-value">450+</div>
+<p>Registered Learners</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="float-card">
+<div class="float-value">96%</div>
+<p>Interview Confidence Growth</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="features" class="section">
+<div class="container">
+<div class="section-title">Platform Core Features</div>
+<div class="section-sub">
+Designed as a complete interview preparation environment instead of a simple questionnaire.
+</div>
+
+<div class="row g-4">
+<div class="col-md-4">
+<div class="feature-box">
+<div class="icon">🤖</div>
+<h4>AI Answer Evaluation</h4>
+<p>Every answer is evaluated for relevance, clarity, technical understanding and communication quality.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<div class="icon">📊</div>
+<h4>Performance Analytics</h4>
+<p>Track category wise growth, average score trends, strengths, weaknesses and interview consistency.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<div class="icon">🎯</div>
+<h4>Real Interview Simulation</h4>
+<p>Practice Python, Java, C and HR interviews with timed structured mock interview flow.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="analytics" class="section">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-md-6">
+<h2 style="font-size:44px;font-weight:800;">Professional Performance Tracking Dashboard</h2>
+<p style="font-size:18px;color:#64748b;line-height:1.8;">
+The system continuously records interview outcomes, generates user growth snapshots,
+and gives AI-backed personalized improvement recommendations after every completed interview.
+</p>
+
+<ul style="line-height:2;font-size:17px;">
+<li>✔ Score based interview feedback</li>
+<li>✔ Strength & weakness analysis</li>
+<li>✔ Historical interview records</li>
+<li>✔ Category comparison analytics</li>
+<li>✔ Admin monitoring support</li>
+</ul>
+</div>
+
+<div class="col-md-6">
+<div class="showcase">
+<div class="show-box"><h5>Latest Interview Score</h5><h2>8.7 / 10</h2></div>
+<div class="show-box"><h5>Strong Areas</h5><p>Confidence, technical explanation, structured response</p></div>
+<div class="show-box"><h5>Improvement Focus</h5><p>Need shorter concise answers in conceptual questions</p></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="cta">
+<h2 style="font-size:48px;font-weight:800;">Prepare Smarter. Perform Better.</h2>
+<p style="font-size:19px;margin-top:20px;">Join the AI interview readiness platform now.</p>
+<br>
+<a href="/register" class="hero-btn hero-primary">Create Free Account</a>
+</section>
+
+<footer class="footer">
+<h4>AI Interview Trainer</h4>
+<p>Advanced Mock Interview & AI Performance Analysis Platform</p>
+<p>© 2026 All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+.history-wrapper{
+width:100%;
+max-width:1400px;
+margin:auto;
+padding:30px;
+padding-bottom:100px;
+}
+
+/* TITLE */
+
+.history-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:25px;
+}
+
+/* HERO */
+
+.history-hero{
+padding:30px;
+border-radius:22px;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+text-align:center;
+margin-bottom:35px;
+box-shadow:0 15px 40px rgba(37,99,235,0.3);
+}
+
+.history-hero h3{
+font-size:28px;
+font-weight:800;
+}
+
+/* SUMMARY */
+
+.summary-box{
+padding:25px;
+border-radius:18px;
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.summary-number{
+font-size:32px;
+font-weight:800;
+color:#2563eb;
+}
+
+/* CARD */
+
+.history-card{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+transition:0.25s;
+height:100%;
+}
+
+.history-card:hover{
+transform:translateY(-6px);
+box-shadow:0 18px 40px rgba(37,99,235,0.12);
+}
+
+/* HEADER */
+
+.history-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+}
+
+.category{
+font-size:18px;
+font-weight:700;
+}
+
+.date{
+font-size:13px;
+color:#64748b;
+margin-bottom:12px;
+}
+
+.score{
+padding:7px 14px;
+border-radius:20px;
+font-weight:700;
+font-size:14px;
+}
+
+.score-high{background:#dcfce7;color:#166534;}
+.score-medium{background:#fef9c3;color:#854d0e;}
+.score-low{background:#fee2e2;color:#991b1b;}
+
+.desc{
+font-size:14px;
+color:#475569;
+margin-bottom:15px;
+}
+
+.badge-box{
+padding:7px 14px;
+border-radius:10px;
+background:#eef2ff;
+display:inline-block;
+font-size:13px;
+font-weight:600;
+margin-top:10px;
+}
+
+.section-title{
+font-size:24px;
+font-weight:800;
+margin-top:50px;
+margin-bottom:20px;
+}
+
+.card-ui{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.subtext{
+color:#64748b;
+}
+
+</style>
+
+
+<div class="history-wrapper">
+
+<div class="history-title">Interview History</div>
+
+<div class="history-hero">
+<h3>Your Learning Timeline</h3>
+<p>Review completed interviews and understand how your performance is evolving.</p>
+</div>
+
+
+{% if interviews %}
+
+<!-- SUMMARY STRIP -->
+
+<div class="row g-4 mb-4">
+
+<div class="col-md-4">
+<div class="summary-box">
+<div class="summary-number">{{interviews|length}}</div>
+<p>Total Completed</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="summary-box">
+<div class="summary-number">{{ interviews[-1].score }}</div>
+<p>Latest Score</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="summary-box">
+<div class="summary-number">
+{% set best = interviews|map(attribute='score')|max %}
+{{best}}
+</div>
+<p>Best Performance</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- TIMELINE -->
+
+<div class="section-title">Completed Interviews</div>
+
+<div class="row g-4">
+
+{% for interview in interviews|reverse %}
+
+<div class="col-md-6">
+
+<div class="history-card">
+
+<div class="history-header">
+
+<div class="category">{{interview.category}} Interview</div>
+
+{% if interview.score >= 8 %}
+<span class="score score-high">{{interview.score}} / 10</span>
+{% elif interview.score >= 5 %}
+<span class="score score-medium">{{interview.score}} / 10</span>
+{% else %}
+<span class="score score-low">{{interview.score}} / 10</span>
+{% endif %}
+
+</div>
+
+<div class="date">{{interview.date}}</div>
+
+<div class="desc">
+Performance summary for your <b>{{interview.category}}</b> interview session.
+Review this attempt and continue practicing to improve consistency.
+</div>
+
+{% if interview.score >= 8 %}
+<div class="badge-box">Strong Attempt</div>
+{% elif interview.score >= 5 %}
+<div class="badge-box">Moderate Attempt</div>
+{% else %}
+<div class="badge-box">Needs Improvement</div>
+{% endif %}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<!-- PROGRESSION INSIGHT -->
+
+<div class="section-title">Progress Reflection</div>
+
+<div class="card-ui">
+
+<p class="subtext">
+Each completed interview adds to your preparation depth. Reviewing past attempts helps identify repeated mistakes, stronger categories, and consistency trends over time.
+</p>
+
+<ul class="subtext mt-3">
+<li>Track categories where your scores are improving</li>
+<li>Observe recurring low-score areas</li>
+<li>Practice weak categories more frequently</li>
+<li>Use history as your personal interview journal</li>
+</ul>
+
+</div>
+
+{% else %}
+
+<div class="card-ui text-center">
+
+<h5>No Interview History Yet</h5>
+
+<p class="subtext">
+Start practicing to build your interview timeline and track performance.
+</p>
+
+<a href="/startpage" class="start-btn mt-2">
+Start Interview
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

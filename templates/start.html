@@ -1,0 +1,220 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+
+<style>
+
+.start-wrapper{
+width:100%;
+max-width:1400px;
+margin:auto;
+padding:30px;
+padding-bottom:100px;
+}
+
+.page-title{
+font-size:34px;
+font-weight:800;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
+}
+
+/* HERO */
+
+.start-hero{
+padding:35px;
+border-radius:22px;
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+color:white;
+text-align:center;
+margin-bottom:35px;
+box-shadow:0 15px 40px rgba(37,99,235,0.3);
+}
+
+.start-hero h3{
+font-size:28px;
+font-weight:800;
+}
+
+.start-hero p{
+opacity:0.9;
+}
+
+/* FEATURES */
+
+.feature-box{
+padding:25px;
+border-radius:18px;
+background:linear-gradient(135deg,#ffffff,#eef2ff);
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+height:100%;
+}
+
+.feature-box h4{
+font-size:22px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+/* SECTION */
+
+.section-title{
+font-size:24px;
+font-weight:800;
+margin-top:40px;
+margin-bottom:20px;
+}
+
+/* CATEGORY */
+
+.category-card{
+padding:30px;
+border-radius:20px;
+color:white;
+height:100%;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+transition:0.25s;
+}
+
+.category-card:hover{
+transform:translateY(-6px);
+}
+
+.python{background:linear-gradient(135deg,#2563eb,#4f46e5);}
+.hr{background:linear-gradient(135deg,#f97316,#fb923c);}
+.java{background:linear-gradient(135deg,#10b981,#34d399);}
+.cbg{background:linear-gradient(135deg,#ef4444,#f87171);}
+
+.category-card h4{
+font-size:24px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.category-card p{
+opacity:0.92;
+min-height:70px;
+}
+
+/* BTN */
+
+.start-btn{
+display:inline-block;
+margin-top:18px;
+padding:12px 22px;
+background:white;
+color:#2563eb;
+text-decoration:none;
+border-radius:12px;
+font-weight:800;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+
+<div class="start-wrapper">
+
+<div class="page-title">Start Interview</div>
+
+<div class="start-hero">
+<h3>AI Powered Mock Interview System</h3>
+<p>Practice technical and HR interviews with AI-driven evaluation and detailed performance feedback.</p>
+</div>
+
+
+<!-- FEATURES -->
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="feature-box">
+<h4>🧠 Real AI Evaluation</h4>
+<p>Transformer + LLM based intelligent answer scoring.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<h4>📊 Detailed Analytics</h4>
+<p>Track strengths, weak areas, and category performance.</p>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="feature-box">
+<h4>📄 Professional Report</h4>
+<p>Understand your interview readiness with detailed insights.</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- CATEGORY SECTION -->
+
+<div class="section-title">Select Interview Category</div>
+
+<div class="row g-4">
+
+<div class="col-md-6">
+<div class="category-card python">
+<h4>🐍 Python Technical</h4>
+<p>Practice Python fundamentals, OOP, coding logic, and explanations.</p>
+
+<form method="POST" action="/start">
+<input type="hidden" name="category" value="Python">
+<button type="submit" class="start-btn">▶ Start Python Interview</button>
+</form>
+
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="category-card hr">
+<h4>💬 HR Interview</h4>
+<p>Prepare self-introduction, strengths, weaknesses, and behavioral communication.</p>
+
+<form method="POST" action="/start">
+<input type="hidden" name="category" value="HR">
+<button type="submit" class="start-btn">▶ Start HR Interview</button>
+</form>
+
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="category-card java">
+<h4>☕ Java Technical</h4>
+<p>Practice OOP, collections, JVM concepts, exception handling, and Java coding.</p>
+
+<form method="POST" action="/start">
+<input type="hidden" name="category" value="Java">
+<button type="submit" class="start-btn">▶ Start Java Interview</button>
+</form>
+
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="category-card cbg">
+<h4>🔴 C Technical</h4>
+<p>Strengthen pointers, functions, memory handling, and programming basics.</p>
+
+<form method="POST" action="/start">
+<input type="hidden" name="category" value="C">
+<button type="submit" class="start-btn">▶ Start C Interview</button>
+</form>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
